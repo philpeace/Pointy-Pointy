@@ -1,0 +1,3 @@
+middlewareClasses = (
+    #'middleware.Middleware:AuthenticationMiddleware'
+)

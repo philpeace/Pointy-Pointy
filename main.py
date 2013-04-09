@@ -1,25 +1,25 @@
-#!/usr/bin/env python
-#
-# Copyright 2007 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+from google.appengine.ext.webapp.util import run_wsgi_app
 import webapp2
+from routes.mapper import Mapper
+#from routes.middleware import RoutesMiddleware
+from routing import add_routes
+from wsgi import WSGIApplication
+import logging
 
-class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.write('Hello world!')
+map = Mapper()
+add_routes(map)
 
-app = webapp2.WSGIApplication([
-    ('/', MainHandler)
-], debug=True)
+#app = webapp2.WSGIApplication([
+#    ('/', MainHandler)
+#], debug=True)
+
+logging.getLogger().setLevel(logging.INFO)
+
+#app = RoutesMiddleware(app, map)     # ``map`` is a routes.Mapper.
+app = WSGIApplication(map, debug=True)
+
+def main():
+    run_wsgi_app(app)
+
+if __name__ == "__main__":
+    main()

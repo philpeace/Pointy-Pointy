@@ -1,0 +1,12 @@
+{% extends "../master.html" %}
+
+{% block main %}
+<h1>Map new</h1>
+
+<form action="{{ router.mapcreate }}" method="POST">
+   <p>Name: <input type="text" name="name"></p>
+   <p>Desc: <input type="text" name="description"></p>
+   <p><input type="submit" ></p>
+</form>
+
+{% endblock main %}

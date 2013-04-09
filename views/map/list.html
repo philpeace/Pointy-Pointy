@@ -1,0 +1,10 @@
+{% extends "../master.html" %}
+
+{% block main %}
+<h1>Map list</h1>
+
+{% for m in maps %}
+<p>{% m.name %}|{% m.description %}</p>
+{% endfor %}
+
+{% endblock main %}
