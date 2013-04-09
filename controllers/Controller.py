@@ -2,7 +2,7 @@ import sys
 from Router import Router
 from SessionManager import SessionManager
 import cgi
-from google.appengine.ext.webapp import template
+
 import logging
 import os
 import traceback
@@ -25,7 +25,7 @@ class Controller(object):
 
     def initialize(self):
         pass
-
+        
     def handle_exception(self, e, debug):
         self.response.set_status(500)
         logging.exception(str(e))
@@ -48,8 +48,6 @@ class Controller(object):
             if (path is None):
                 path = '../views/%s/%s.html' % (self.name.lower(), self.action.lower())
 
-            logging.debug('path = ' + path)
-
             if (context is None):
                 context = dict()
 
@@ -59,7 +57,7 @@ class Controller(object):
             context['router'] = Router()
 
             path = os.path.join(os.path.dirname(__file__), path)
-            logging.debug(path)
+            logging.info('templatepath = ' + path)
             self.response.out.write(template.render(path, context))
         #except:
         #    self.transfer('Error', 'get', status='500')
@@ -73,7 +71,7 @@ class Controller(object):
         """
         
         try:
-            logging.debug('Controller.redirect(' + uri + '), ' + str(permanent))
+            logging.info('Controller.redirect(' + uri + '), ' + str(permanent))
 
             if permanent:
                 self.response.set_status(301)

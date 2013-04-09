@@ -2,7 +2,7 @@ import logging
 
 class Configuration(object):
     def __init__(self):
-        logging.debug('Configuration(__init__)')
+        logging.info('Configuration(__init__)')
         self.ViewPath = '/views'
         self.ErrorController = 'Error'
 

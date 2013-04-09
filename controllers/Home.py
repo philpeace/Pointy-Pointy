@@ -5,6 +5,6 @@ import logging
 class Home(controllerBase):
     #@ActionBinder
     def index(self):
-        logging.debug('Home.index ------------------()')
+        logging.info('Home.index ------------------()')
 
         self.rendertemplate()

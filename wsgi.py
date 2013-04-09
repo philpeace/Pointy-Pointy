@@ -36,17 +36,17 @@ class WSGIApplication(object):
 
         try:
             if kargs is None or 'controller' not in kargs:
-                logging.debug('kargs is None')
+                logging.info('kargs is None')
                 kargs = dict(controller='Error', status='404')
 
             module_name, class_name = Manager.getModuleAndControllerNames(kargs['controller'])
 
             del kargs['controller']
 
-            logging.debug('module_name = ' + module_name)
-            logging.debug('class_name = ' + class_name)
+            logging.info('module_name = ' + module_name)
+            logging.info('class_name = ' + class_name)
         except Exception, e:
-            logging.debug('CRITICAL: ' + str(e))
+            logging.info('CRITICAL: ' + str(e))
             raise TypeError('Controller is not set, or not formatted in the form "my.module.name:MyControllerName".' + str(e))
 
         # Initialize matched controller from given module.
