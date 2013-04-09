@@ -2,34 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <meta content="en-us" http-equiv="Content-Language" />
+    <meta content="en-gb" http-equiv="Content-Language" />
     <link rel="stylesheet" href="/styles/styles.css" />
-    <title>{% block title %}{% endblock %} Grrpin </title>
-    <script src="http://www.google.com/jsapi"></script>
-    <!--
-    <script type="text/javascript">
-        google.load("prototype", "1.6.1.0");
-        google.load("scriptaculous", "1.8.3");
-     </script>
-    -->
+    <title>{% block title %}{% endblock %} </title>
+
     {% block head %} {% endblock head %}
 </head>
-  <body class="{% block bodyclass %}{{ bodyClass|slugify }}{% endblock bodyclass %}">
-      <!--
-<script type="text/javascript">
-  var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-8571722-2']);_gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-  })();
-
-</script>
-      -->
+<body>
     <div id="container">
         <div id="header">
-			<div id="logo"><a href="/">Grrpin</a></div>
+            <div id="logo"><a href="/">Pointy-Pointy</a></div>
             {% block header %} {% endblock header %}
         </div>
         <div id="main">

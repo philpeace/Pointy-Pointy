@@ -2,17 +2,23 @@ import sys
 from Router import Router
 from SessionManager import SessionManager
 import cgi
-
 import logging
 import os
 import traceback
 import urlparse
 from PeacePy.Web import Manager
 from PeacePy.Configuration import Configuration
+from jinja2 import Environment, FileSystemLoader
+
+viewsPath = os.path.normpath(os.path.join(os.path.dirname(__file__), '../views'))
+
+logging.info('jinja2-path = ' + viewsPath)
+
+JINJA_ENVIRONMENT = Environment(loader=FileSystemLoader(viewsPath))
 
 class Controller(object):
     def __init__(self, request, response):
-        logging.info(request.path + ' ------------------------------------------------------------------------------------')
+        logging.info('request.path = ' + request.path + ' -----------------------------------')
         self.request = request
         self.response = response
         self.sessionManager = SessionManager(self.request, self.response)
@@ -21,7 +27,6 @@ class Controller(object):
         self.name = ''
         self.items = {}
         self.initialize()
-        logging.info(Configuration)
 
     def initialize(self):
         pass
@@ -46,7 +51,7 @@ class Controller(object):
     def rendertemplate(self, context=None, path=None):
         #try:
             if (path is None):
-                path = '../views/%s/%s.html' % (self.name.lower(), self.action.lower())
+                path = '%s/%s.html' % (self.name.lower(), self.action.lower())
 
             if (context is None):
                 context = dict()
@@ -56,9 +61,12 @@ class Controller(object):
             context['bodyClass'] = self.action
             context['router'] = Router()
 
-            path = os.path.join(os.path.dirname(__file__), path)
+            #path = os.path.join(os.path.dirname(__file__), path)
             logging.info('templatepath = ' + path)
-            self.response.out.write(template.render(path, context))
+            
+            template = JINJA_ENVIRONMENT.get_template(path)
+
+            self.response.out.write(template.render(context))
         #except:
         #    self.transfer('Error', 'get', status='500')
 
