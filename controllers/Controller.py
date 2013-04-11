@@ -21,8 +21,8 @@ class Controller(object):
         logging.info('request.path = ' + request.path + ' -----------------------------------')
         self.request = request
         self.response = response
-        self.sessionManager = SessionManager(self.request, self.response)
-        self.session = self.sessionManager.current()
+        #self.sessionManager = SessionManager(self.request, self.response)
+        #self.session = self.sessionManager.current()
         self.action = ''
         self.name = ''
         self.items = {}
@@ -56,9 +56,9 @@ class Controller(object):
             if (context is None):
                 context = dict()
 
-            context['session'] = self.session
+            #context['session'] = self.session
             context['request'] = self.request
-            context['bodyClass'] = self.action
+            #context['bodyClass'] = self.action
             context['router'] = Router()
 
             #path = os.path.join(os.path.dirname(__file__), path)

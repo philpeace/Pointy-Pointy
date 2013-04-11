@@ -1,5 +1,16 @@
 {% extends "master.html" %}
 
 {% block main %}
+<script type="text/javascript" src="/_ah/channel/jsapi"></script>
+
+  <script>
+    channel = new goog.appengine.Channel('{{token}}');
+    socket = channel.open();
+    socket.onopen = function() { alert('onopen'); };
+    socket.onmessage = function() { alert('onmessage'); };
+    socket.onerror = function(e) { alert('onerror ' + e.description ); };
+    socket.onclose = function() { alert('onclose'); };
+  </script>
+
 <h1>Home</h1>
 {% endblock main %}
